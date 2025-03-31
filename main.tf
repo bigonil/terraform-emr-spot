@@ -4,7 +4,7 @@ resource "aws_emr_cluster" "this" {
   applications     = ["Spark", "Hadoop"]
   log_uri          = var.log_uri
   service_role     = aws_iam_role.emr_service.arn
-  autoscaling_role = aws_iam_role.emr_autoscaling.arn
+  #autoscaling_role = aws_iam_role.emr_autoscaling.arn
   ec2_attributes {
     subnet_id                         = var.subnet_id
     emr_managed_master_security_group = aws_security_group.emr_master.id
@@ -42,7 +42,7 @@ resource "aws_emr_cluster" "this" {
       spot_specification {
         timeout_duration_minutes = 10
         timeout_action           = "SWITCH_TO_ON_DEMAND"
-        allocation_strategy      = "CAPACITY_OPTIMIZED"
+        allocation_strategy = "capacity-optimized"
       }
     }
 
